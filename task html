@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<form method="post">
+  <input name="title" placeholder="Naya task likho" required>
+  <button>Add</button>
+</form>
+<ul>
+  {% for t in tasks %}
+  <li>
+    <span class="{{ 'done' if t.done else '' }}">{{ t.title }}</span>
+    <form class="inline" method="post" action="{{ url_for('toggle', task_id=t.id) }}">
+      <button>{{ 'Undo' if t.done else 'Done' }}</button>
+    </form>
+    <form class="inline" method="post" action="{{ url_for('delete', task_id=t.id) }}">
+      <button>Delete</button>
+    </form>
+  </li>
+  {% else %}
+  <li>Abhi koi task nahi hai.</li>
+  {% endfor %}
+</ul>
+{% endblock %}
