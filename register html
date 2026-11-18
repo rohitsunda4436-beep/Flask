@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Task Manager</title>
+  <style>
+    body { font-family: Arial; max-width: 500px; margin: 40px auto; padding: 0 15px; }
+    input, button { padding: 8px; margin: 4px 0; }
+    .flash { background: #ffe9e9; padding: 8px; margin: 8px 0; border-radius: 4px; }
+    .done { text-decoration: line-through; color: gray; }
+    li { margin: 8px 0; }
+    form.inline { display: inline; }
+  </style>
+</head>
+<body>
+  <h2>Task Manager</h2>
+  {% if session.username %}
+    <p>Hi, {{ session.username }} | <a href="{{ url_for('logout') }}">Logout</a></p>
+  {% endif %}
+  {% for m in get_flashed_messages() %}
+    <div class="flash">{{ m }}</div>
+  {% endfor %}
+  {% block content %}{% endblock %}
+</body>
+</html>
